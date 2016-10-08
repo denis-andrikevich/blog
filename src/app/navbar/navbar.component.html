@@ -1,3 +1,13 @@
-<md-toolbar color="'primary'">
-  <span>My Application Title</span>
+<md-toolbar color="primary">
+  <button md-icon-button 
+          [routerLink]="['/']">
+    <md-icon svgSrc="/assets/images/icon.svg"></md-icon>
+  </button>
+  <span class="grow"></span>
+  <button md-button 
+          [routerLink]="['/register']"
+          [routerLinkActive]="['active']">Register</button>
+  <button md-button 
+          [routerLink]="['/login']"
+          [routerLinkActive]="['active']">Login</button>
 </md-toolbar>

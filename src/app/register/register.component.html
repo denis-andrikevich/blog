@@ -1,0 +1,34 @@
+<md-card class="register-form">
+  <form (ngSubmit)="onSubmit(form.value)" 
+        [formGroup]="form" 
+        novalidate>
+    <md-card-title>
+      Register form
+    </md-card-title>
+    <md-card-content>
+        <md-input class="md-block" 
+                  type="text"
+                  placeholder="User Name" 
+                  formControlName="username"></md-input>
+        <md-input class="md-block" 
+                  placeholder="Email" 
+                  type="text"
+                  formControlName="email"></md-input>
+        <md-input class="md-block" 
+                  placeholder="Password" 
+                  type="password"
+                  formControlName="password"></md-input>
+        <select formControlName="sex" 
+                class="md-block select">
+                <option *ngFor="let sex of sexs" 
+                        [value]="sex">{{sex}}</option>
+        </select>
+    </md-card-content>    
+    <md-card-actions align="end">
+      <button md-raised-button
+              [disabled]="form.invalid"
+              type="submit" 
+              class="md-primary">Register</button>
+    </md-card-actions>
+  </form>
+</md-card>
