@@ -1,3 +1,5 @@
+import { ControlMessageComponent } from './control-message/control-message.component';
+import { ValidationService } from './services/validation.service';
 import { UserService } from './services/user.service';
 import { BlogRoutingModule } from './app-routing.module';
 import { BrowserModule } from '@angular/platform-browser';
@@ -18,16 +20,17 @@ import { LoginComponent } from './login/login.component';
     HomeComponent,
     NavbarComponent,
     RegisterComponent,
-    LoginComponent
+    LoginComponent,
+    ControlMessageComponent
   ],
   imports: [
     BrowserModule,
     ReactiveFormsModule,
     HttpModule,
     BlogRoutingModule,
-    MaterialModule.forRoot() 
+    MaterialModule.forRoot()
   ],
-  providers: [UserService],
+  providers: [UserService, ValidationService],
   bootstrap: [AppComponent]
 })
 export class AppModule { }

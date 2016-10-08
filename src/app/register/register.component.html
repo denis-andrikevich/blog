@@ -10,14 +10,19 @@
                   type="text"
                   placeholder="User Name" 
                   formControlName="username"></md-input>
+        <control-messages [control]="form.controls.username"></control-messages>
+
         <md-input class="md-block" 
                   placeholder="Email" 
                   type="text"
                   formControlName="email"></md-input>
+        <control-messages [control]="form.controls.email"></control-messages>
+
         <md-input class="md-block" 
                   placeholder="Password" 
                   type="password"
                   formControlName="password"></md-input>
+        <control-messages [control]="form.controls.password"></control-messages>
         <select formControlName="sex" 
                 class="md-block select">
                 <option *ngFor="let sex of sexs" 
