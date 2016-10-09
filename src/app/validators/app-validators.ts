@@ -1,15 +1,6 @@
-export class ValidationService {
-    static getValidatorErrorMessage(validatorName: string, validatorValue?: any) {
-        let config = {
-            'required': 'Required',
-            'invalidEmailAddress': 'Invalid email address',
-            'invalidPassword': 'Invalid password. Password must be at least 6 characters long, and contain a number.',
-            'minlength': `Minimum length ${validatorValue.requiredLength}`
-        };
+import { AbstractControl } from '@angular/forms';
 
-        return config[validatorName];
-    }
-
+export class AppValidators {
     static emailValidator(control) {
         if (control.value){
             if (control.value.match(/[a-z0-9!#$%&'*+/=?^_`{|}~-]+(?:\.[a-z0-9!#$%&'*+/=?^_`{|}~-]+)*@(?:[a-z0-9](?:[a-z0-9-]*[a-z0-9])?\.)+[a-z0-9](?:[a-z0-9-]*[a-z0-9])?/)) {
@@ -29,4 +20,4 @@ export class ValidationService {
             return { 'invalidPassword': true };
         }
     }
-}
+};

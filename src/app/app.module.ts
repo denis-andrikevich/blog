@@ -1,5 +1,4 @@
 import { ControlMessageComponent } from './control-message/control-message.component';
-import { ValidationService } from './services/validation.service';
 import { UserService } from './services/user.service';
 import { BlogRoutingModule } from './app-routing.module';
 import { BrowserModule } from '@angular/platform-browser';
@@ -30,7 +29,7 @@ import { LoginComponent } from './login/login.component';
     BlogRoutingModule,
     MaterialModule.forRoot()
   ],
-  providers: [UserService, ValidationService],
+  providers: [UserService],
   bootstrap: [AppComponent]
 })
 export class AppModule { }
