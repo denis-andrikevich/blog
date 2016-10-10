@@ -18,3 +18,11 @@ body{
   margin-bottom: 10px;
   margin-top: 10px;
 }
+
+.auth-form{
+    margin: 30px auto;
+    max-width: 500px;
+}
+.auth-form md-card-actions{
+    margin: 0;
+}

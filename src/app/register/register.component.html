@@ -1,4 +1,4 @@
-<md-card class="register-form">
+<md-card class="auth-form">
   <form (ngSubmit)="onSubmit(form.value)" 
         [formGroup]="form" 
         novalidate>
@@ -9,8 +9,8 @@
         <md-input class="md-block" 
                   type="text"
                   placeholder="User Name" 
-                  formControlName="username"></md-input>
-        <control-messages [control]="form.controls.username"></control-messages>
+                  formControlName="name"></md-input>
+        <control-messages [control]="form.controls.name"></control-messages>
 
         <md-input class="md-block" 
                   placeholder="Email" 

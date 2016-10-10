@@ -16,7 +16,7 @@ export class RegisterComponent {
   sexs:string[] = ['men', 'women'];
   constructor(private fb: FormBuilder, private userService: UserService) {
     this.form = this.fb.group({
-      username: ['', [Validators.required, Validators.minLength(4)]],
+      name: ['', [Validators.required, Validators.minLength(4)]],
       email: ['', [Validators.required, AppValidators.emailValidator]],
       password: ['', [Validators.required, AppValidators.passwordValidator]],
       sex: [this.sexs[0], Validators.required]
