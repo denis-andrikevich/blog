@@ -1,3 +1,28 @@
-<p>
-  login works!
-</p>
+<md-card class="auth-form">
+  <form (ngSubmit)="onSubmit(form.value)"
+        [formGroup]="form"
+        novalidate>
+        <md-card-title>
+          Login form
+        </md-card-title>
+        <md-card-content>
+          <md-input class="md-block"
+                    type="text"
+                    placeholder="Email"
+                    formControlName="email"></md-input>
+          <control-messages [control]="form.controls.email"></control-messages>
+
+          <md-input class="md-block"
+                    type="password"
+                    placeholder="Password"
+                    formControlName="password"></md-input>
+          <control-messages [control]="form.controls.password"></control-messages>
+        </md-card-content>
+        <md-card-actions align="end">
+          <button md-raised-button
+                  type="submit"
+                  [disabled]="form.invalid"
+                  class="md-primary">Login</button>
+        </md-card-actions>
+  </form>
+</md-card>
