@@ -5,9 +5,14 @@
   </button>
   <span class="grow"></span>
   <button md-button 
+          *ngIf="!authService.isLoggedIn"
           [routerLink]="['/register']"
           [routerLinkActive]="['active']">Register</button>
   <button md-button 
+          *ngIf="!authService.isLoggedIn"
           [routerLink]="['/login']"
           [routerLinkActive]="['active']">Login</button>
+  <button md-button 
+          *ngIf="authService.isLoggedIn"
+          (click)="logout()">Logout</button>
 </md-toolbar>

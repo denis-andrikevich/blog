@@ -1,4 +1,4 @@
-import { UserService } from './../services/user.service';
+import { AuthService } from './../services/auth.service';
 import { User } from './../interfaces/user';
 import { Component } from '@angular/core';
 import { FormGroup, FormBuilder, Validators } from '@angular/forms';
@@ -14,7 +14,7 @@ import { AppValidators } from '../validators/app-validators';
 export class RegisterComponent {
   form: FormGroup;
   sexs: string[] = ['men', 'women'];
-  constructor(private fb: FormBuilder, private userService: UserService) {
+  constructor(private fb: FormBuilder, private authService: AuthService) {
     this.form = this.fb.group({
       name: ['', [Validators.required, Validators.minLength(4)]],
       email: ['', [Validators.required, AppValidators.emailValidator]],
@@ -24,7 +24,7 @@ export class RegisterComponent {
   }
 
   onSubmit() {
-    this.userService.register(this.form.value);
+    this.authService.register(this.form.value);
   }
 
 }

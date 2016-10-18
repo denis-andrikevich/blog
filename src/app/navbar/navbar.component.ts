@@ -1,3 +1,4 @@
+import { AuthService } from './../services/auth.service';
 import { Component, OnInit } from '@angular/core';
 
 @Component({
@@ -5,11 +6,12 @@ import { Component, OnInit } from '@angular/core';
   templateUrl: './navbar.component.html',
   styleUrls: ['./navbar.component.css']
 })
-export class NavbarComponent implements OnInit {
+export class NavbarComponent {
 
-  constructor() { }
+  constructor(private authService: AuthService) { }
 
-  ngOnInit() {
+  logout(){
+    this.authService.logout();
   }
 
 }

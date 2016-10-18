@@ -2,11 +2,11 @@ import { Injectable } from '@angular/core';
 import { Observable } from 'rxjs/Rx';
 import { Router } from '@angular/router';
 import { Response, Headers, Http } from '@angular/http';
+import { AuthService } from './auth.service';
 
 @Injectable()
 export class ApiHttp {
-    constructor(private http: Http, private _router: Router) {
-    }
+    constructor(private http: Http, private _router: Router, private authService: AuthService) { }
 
     createAuthorizationHeader(headers: Headers) {
         headers.append('authorization', 'Bearer ' + localStorage.getItem('auth_token'));
@@ -33,8 +33,8 @@ export class ApiHttp {
         return observable
             .catch((err, source) => {
                 if (err.status === 401) {
-                    localStorage.removeItem('auth_token');
-                    this._router.navigate(['/register']);
+                    this.authService.logout();
+                    this._router.navigate(['/login']);
                     return Observable.empty();
                 } else {
                     return Observable.throw(err);
@@ -43,3 +43,11 @@ export class ApiHttp {
 
     }
 }
+
+let apiHttpFactrory = (http: Http, router: Router, authService: AuthService) => new ApiHttp(http, router, authService);
+
+export let apiHttpServiceProvider = {
+    provide: ApiHttp,
+    useFactory: apiHttpFactrory,
+    deps: [Http, Router]
+};
