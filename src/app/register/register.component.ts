@@ -13,7 +13,7 @@ import { AppValidators } from '../validators/app-validators';
 })
 export class RegisterComponent {
   form: FormGroup;
-  sexs:string[] = ['men', 'women'];
+  sexs: string[] = ['men', 'women'];
   constructor(private fb: FormBuilder, private userService: UserService) {
     this.form = this.fb.group({
       name: ['', [Validators.required, Validators.minLength(4)]],
@@ -23,7 +23,7 @@ export class RegisterComponent {
     })
   }
 
-  onSubmit(){
+  onSubmit() {
     this.userService.register(this.form.value);
   }
 

@@ -9,17 +9,17 @@ import { AppValidators } from '../validators/app-validators';
   templateUrl: './login.component.html',
   styleUrls: ['./login.component.css']
 })
-export class LoginComponent{
+export class LoginComponent {
   form: FormGroup;
 
-  constructor(private _fb: FormBuilder, private _userService: UserService) { 
+  constructor(private _fb: FormBuilder, private _userService: UserService) {
     this.form = this._fb.group({
       email: ['', [Validators.required, AppValidators.emailValidator]],
       password: ['', [Validators.required, AppValidators.passwordValidator]]
-    })
+    });
   }
 
-  onSubmit(){
+  onSubmit() {
     this._userService.login(this.form.value.email, this.form.value.password);
   }
 
