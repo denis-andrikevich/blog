@@ -6,6 +6,7 @@
           Login form
         </md-card-title>
         <md-card-content>
+          <p *ngIf="errorMessage">Please check your login data</p>
           <md-input class="md-block"
                     type="text"
                     placeholder="Email"

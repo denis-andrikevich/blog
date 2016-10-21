@@ -1,12 +1,12 @@
-import { Injectable } from '@angular/core';
+import { ErrorNotifier } from './error-notifier.service';
+import { Injectable, Inject, ReflectiveInjector } from '@angular/core';
 import { Observable } from 'rxjs/Rx';
-import { Router } from '@angular/router';
 import { Response, Headers, Http } from '@angular/http';
 import { AuthService } from './auth.service';
 
 @Injectable()
 export class ApiHttp {
-    constructor(private http: Http, private _router: Router, private authService: AuthService) { }
+    constructor(private http: Http, private errorNotifier: ErrorNotifier) { }
 
     createAuthorizationHeader(headers: Headers) {
         headers.append('authorization', 'Bearer ' + localStorage.getItem('auth_token'));
@@ -29,12 +29,10 @@ export class ApiHttp {
     }
 
     intercept(observable: Observable<Response>): Observable<Response> {
-        observable.subscribe(data => console.log(data));
         return observable
             .catch((err, source) => {
                 if (err.status === 401) {
-                    this.authService.logout();
-                    this._router.navigate(['/login']);
+                    this.errorNotifier.notifyError(err);
                     return Observable.empty();
                 } else {
                     return Observable.throw(err);
@@ -44,10 +42,13 @@ export class ApiHttp {
     }
 }
 
-let apiHttpFactrory = (http: Http, router: Router, authService: AuthService) => new ApiHttp(http, router, authService);
 
-export let apiHttpServiceProvider = {
-    provide: ApiHttp,
-    useFactory: apiHttpFactrory,
-    deps: [Http, Router]
-};
+// // let apiHttpFactrory = (http: Http, router: Router,  authService: AuthService) => new ApiHttp(http, router, authService);
+
+// export let apiHttpServiceProvider = {
+//     provide: ApiHttp,
+//     useClass: ApiHttp
+//     // useFactory: apiHttpFactrory,
+//     // deps: [Http, Router]
+// };
+

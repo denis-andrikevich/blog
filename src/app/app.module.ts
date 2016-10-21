@@ -1,3 +1,4 @@
+import { ErrorNotifier } from './services/error-notifier.service';
 import { AuthGuard } from './services/auth-guard.service';
 import { ControlMessageComponent } from './control-message/control-message.component';
 import { AuthService } from './services/auth.service';
@@ -8,7 +9,7 @@ import { ReactiveFormsModule } from '@angular/forms';
 import { HttpModule } from '@angular/http';
 import { MaterialModule } from '@angular/material';
 
-import { apiHttpServiceProvider } from './services/apiHttp.service';
+import { ApiHttp } from './services/apiHttp.service';
 import { AppComponent } from './app.component';
 import { HomeComponent } from './home/home.component';
 import { NavbarComponent } from './navbar/navbar.component';
@@ -32,9 +33,11 @@ import { LoginComponent } from './login/login.component';
     MaterialModule.forRoot()
   ],
   providers: [
-    AuthService,
-    apiHttpServiceProvider,
-    AuthGuard],
+    ApiHttp,
+    AuthService, 
+    AuthGuard,
+    ErrorNotifier
+    ],
   bootstrap: [AppComponent]
 })
 export class AppModule { }

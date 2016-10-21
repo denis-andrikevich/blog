@@ -1,3 +1,4 @@
+import { Router } from '@angular/router';
 import { AuthService } from './../services/auth.service';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { Component, OnInit } from '@angular/core';
@@ -11,8 +12,8 @@ import { AppValidators } from '../validators/app-validators';
 })
 export class LoginComponent {
   form: FormGroup;
-
-  constructor(private _fb: FormBuilder, private authService: AuthService) {
+  errorMessage: boolean = false;
+  constructor(private _fb: FormBuilder, private authService: AuthService, private router: Router) {
     this.form = this._fb.group({
       email: ['', [Validators.required, AppValidators.emailValidator]],
       password: ['', [Validators.required, AppValidators.passwordValidator]]
@@ -20,7 +21,21 @@ export class LoginComponent {
   }
 
   onSubmit() {
-    this.authService.login(this.form.value.email, this.form.value.password);
+    this.authService.login(this.form.value.email, this.form.value.password)
+    .subscribe(status => {
+      if (status){
+        let redirectUrl = this.authService.redirectUrl ? this.authService.redirectUrl : '/';
+        this.authService.redirectUrl = '/';
+        this.router.navigate([redirectUrl]);
+      } else {
+        this.showErrorMessage();
+      }
+    });
+  }
+
+  showErrorMessage(){
+    this.errorMessage = true;
+    setTimeout(() => this.errorMessage = false, 1000);
   }
 
 }

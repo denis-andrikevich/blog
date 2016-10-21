@@ -1,3 +1,5 @@
+import { Response } from '@angular/http';
+import { Observable } from 'rxjs/Rx';
 import { ApiHttp } from './apiHttp.service';
 import { User } from '../interfaces/user';
 import { Injectable } from '@angular/core';
@@ -15,30 +17,24 @@ export class AuthService {
     this.isLoggedIn = !!localStorage.getItem('auth_token');
   }
 
-  register(user: User) {
-    this.apiHttp.post(ApiEndpoint.domen + '/users', user)
-      .map(data => data.json())
-      .subscribe(
-      response => {
-        console.log(response);
-        this.isLoggedIn = true;
-      }
-      )
+  register(user: User): Observable<boolean> {
+    return this.apiHttp.post(ApiEndpoint.domen + '/users', user)
+      .map((response: Response) => {
+        return this.afterLogin(response);
+      });
   }
 
-  login(email: string, password: string) {
-    this.apiHttp.post(ApiEndpoint.domen + '/auth/local', { email, password })
-      .map(data => data.json())
-      .subscribe(response => {
-        localStorage.setItem('auth_token', response.token);
-        this.isLoggedIn = true;
-        this.router.navigate(['/']);
+  login(email: string, password: string): Observable<boolean> {
+    return this.apiHttp.post(ApiEndpoint.domen + '/auth/local', { email, password })
+      .map((response: Response) => {
+        return this.afterLogin(response);
       });
   }
 
   logout() {
     localStorage.removeItem('auth_token');
     this.isLoggedIn = false;
+    this.router.navigate(['/login']);
   }
 
   me() {
@@ -47,6 +43,14 @@ export class AuthService {
       .subscribe(
       response => console.log(response)
       )
+  }
+
+  afterLogin(response): boolean {
+    if (response.status == 200) {
+      localStorage.setItem('auth_token', response.json().token);
+      this.isLoggedIn = true;
+      return true;
+    } return false;
   }
 
 }
