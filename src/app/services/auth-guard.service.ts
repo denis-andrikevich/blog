@@ -4,7 +4,6 @@ import {
   ActivatedRouteSnapshot,
   RouterStateSnapshot,
   CanActivateChild,
-  NavigationExtras,
   CanLoad, Route
 }                           from '@angular/router';
 import { AuthService }      from './auth.service';
@@ -12,7 +11,6 @@ import { AuthService }      from './auth.service';
 @Injectable()
 export class AuthGuard implements CanActivate, CanActivateChild, CanLoad {
   constructor(private authService: AuthService, private router: Router) {
-    console.log('iiiiiiiiii');
   }
 
   canActivate(route: ActivatedRouteSnapshot, state: RouterStateSnapshot): boolean {
@@ -37,13 +35,8 @@ export class AuthGuard implements CanActivate, CanActivateChild, CanLoad {
     // Store the attempted URL for redirecting
     this.authService.redirectUrl = url;
 
-    // that contains our global query params and fragment
-    let navigationExtras: NavigationExtras = {
-      fragment: 'anchor'
-    };
-
     // Navigate to the login page with extras
-    this.router.navigate(['/login'], navigationExtras);
+    this.router.navigate(['/login']);
     return false;
   }
 }

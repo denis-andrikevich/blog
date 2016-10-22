@@ -1,3 +1,4 @@
+import { AuthGuard } from './services/auth-guard.service';
 import { RegisterComponent } from './register/register.component';
 import { LoginComponent } from './login/login.component';
 import { HomeComponent } from './home/home.component';
@@ -8,7 +9,7 @@ const routes: Routes = [
   { path: '', component: HomeComponent },
   { path: 'login', component: LoginComponent },
   { path: 'register', component: RegisterComponent },
-  { path: 'account', loadChildren: './account/account.module#AccountModule' },
+  { path: 'account', loadChildren: './account/account.module#AccountModule', canLoad: [AuthGuard] },
   { path: '**', redirectTo: '/' }
 ];
 

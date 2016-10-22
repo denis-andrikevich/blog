@@ -1,0 +1,31 @@
+ <button md-button 
+        [routerLink]="['/account/posts']">Back</button>
+
+<md-card class="auth-form">
+  <form (ngSubmit)="onSubmit(post.value)"
+        [formGroup]="post"
+        novalidate>
+        <md-card-title>
+          Create Post
+        </md-card-title>
+        <md-card-content>
+          <md-input class="md-block"
+                    type="text"
+                    placeholder="Title"
+                    formControlName="title"></md-input>
+          <control-messages [control]="post.controls.title"></control-messages>
+
+          <md-input class="md-block"
+                    type="text"
+                    placeholder="Body"
+                    formControlName="body"></md-input>
+          <control-messages [control]="post.controls.body"></control-messages>
+        </md-card-content>
+        <md-card-actions align="end">
+          <button md-raised-button
+                  type="submit"
+                  [disabled]="post.invalid"
+                  class="md-primary">Create</button>
+        </md-card-actions>
+  </form>
+</md-card>

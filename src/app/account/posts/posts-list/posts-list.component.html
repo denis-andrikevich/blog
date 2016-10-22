@@ -1,0 +1,11 @@
+<button md-button [routerLink]="['/account/posts/create']">Create</button>
+
+<div>
+	<md-list>
+		<md-list-item *ngFor="let post of posts">
+			<h3 md-line> {{post.title}} </h3>
+			<p md-line> {{post.body}} </p>
+			<p md-line class="demo-2"> {{post.dateCreate | date: 'dd.MM.yyyy HH:mm:ss'}} </p>
+		</md-list-item>
+	</md-list>
+</div>

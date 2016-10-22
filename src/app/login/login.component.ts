@@ -10,14 +10,10 @@ import { AppValidators } from '../validators/app-validators';
   templateUrl: './login.component.html',
   styleUrls: ['./login.component.css']
 })
-export class LoginComponent {
+export class LoginComponent implements OnInit {
   form: FormGroup;
   errorMessage: boolean = false;
   constructor(private _fb: FormBuilder, private authService: AuthService, private router: Router) {
-    this.form = this._fb.group({
-      email: ['', [Validators.required, AppValidators.emailValidator]],
-      password: ['', [Validators.required, AppValidators.passwordValidator]]
-    });
   }
 
   onSubmit() {
@@ -36,6 +32,13 @@ export class LoginComponent {
   showErrorMessage(){
     this.errorMessage = true;
     setTimeout(() => this.errorMessage = false, 1000);
+  }
+
+  ngOnInit(){
+     this.form = this._fb.group({
+      email: ['', [Validators.required, AppValidators.emailValidator]],
+      password: ['', [Validators.required, AppValidators.passwordValidator]]
+    });
   }
 
 }
