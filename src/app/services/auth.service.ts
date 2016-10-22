@@ -13,6 +13,7 @@ import 'rxjs/add/operator/catch';
 export class AuthService {
   isLoggedIn: boolean;
   redirectUrl: string;
+
   constructor(private apiHttp: ApiHttp, private router: Router) {
     this.isLoggedIn = !!localStorage.getItem('auth_token');
   }
@@ -37,16 +38,13 @@ export class AuthService {
     this.router.navigate(['/login']);
   }
 
-  me() {
-    this.apiHttp.get(ApiEndpoint.domen + '/users/me')
-      .map(data => data.json())
-      .subscribe(
-      response => console.log(response)
-      )
+  me(): Observable<any> {
+    return this.apiHttp.get(ApiEndpoint.domen + '/users/me')
+      .map(data => data.json());
   }
 
   afterLogin(response): boolean {
-    if (response.status == 200) {
+    if (response.status === 200) {
       localStorage.setItem('auth_token', response.json().token);
       this.isLoggedIn = true;
       return true;

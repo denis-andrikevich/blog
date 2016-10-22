@@ -11,16 +11,16 @@ import { Component, OnInit } from '@angular/core';
 export class AppComponent implements OnInit {
   constructor(private errorNotifier: ErrorNotifier, private router: Router, private authService: AuthService) { }
 
-  ngOnInit(){
+  ngOnInit() {
     this.errorNotifier.onError((err) => {
       console.log('ERROR NOTIFIER:');
       console.log(err);
-      
+
       let url = this.router.routerState.snapshot.url;
-      if (url != '/login' && url != '/register'){
+      if (url !== '/login' && url !== '/register') {
         this.authService.redirectUrl = url;
         this.router.navigate(['/login']);
       }
-    })
+    });
   }
 }
