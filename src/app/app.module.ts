@@ -1,6 +1,5 @@
 import { PostService } from './services/post.service';
 import { ControlMessageModule } from './control-message/control-message.module';
-import { ErrorNotifier } from './services/error-notifier.service';
 import { AuthGuard } from './services/auth-guard.service';
 import { AuthService } from './services/auth.service';
 import { BlogRoutingModule } from './app-routing.module';
@@ -35,9 +34,8 @@ import { LoginComponent } from './login/login.component';
   ],
   providers: [
     ApiHttp,
-    AuthService, 
+    AuthService,
     AuthGuard,
-    ErrorNotifier,
     PostService
     ],
   bootstrap: [AppComponent]
